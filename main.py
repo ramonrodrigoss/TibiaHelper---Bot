@@ -2,8 +2,7 @@ import os
 import discord
 my_secret = os.environ['TOKEN']
 from keep_alive import keep_alive
-import schedule
-import time
+
 from boosted_creature import criatura_dia
 
 import threading
