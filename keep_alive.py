@@ -1,6 +1,5 @@
 from flask import Flask
 from threading import Thread
-import time
 
 
 app = Flask('')
@@ -17,8 +16,5 @@ def run():
 def keep_alive():
     t = Thread(target=run)
     t.start()
-
-def job():
-    print("I'm working...")
 
 

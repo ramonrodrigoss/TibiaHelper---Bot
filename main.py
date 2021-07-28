@@ -2,11 +2,9 @@ import os
 import discord
 my_secret = os.environ['TOKEN']
 from keep_alive import keep_alive
-
 from boosted_creature import criatura_dia
 
 import threading
-
 def hello():
     t = threading.Timer(3600.0, hello)
     t.start()
@@ -18,7 +16,6 @@ t.start()
  
 
 
-nome, foto = criatura_dia()
 ###############################################################
 client = discord.Client()
 
@@ -47,9 +44,18 @@ async def on_message(message):
   if message.content.startswith('!criatura'):
 
     await message.channel.send('Olha, {0.author.mention}, a Criatura do dia é...'.format(message))
-    await message.channel.send(content = nome)
+    
+    with open ('criatura.txt', 'r+') as arquivo:
+      bixin = arquivo.readlines(1)
+      bixin = str(bixin[0])
+
+      fotin = arquivo.readlines(2)
+      fotin = str(fotin[0])
+
+    await message.channel.send(content = bixin)
     embed1 = discord.Embed()
-    embed1.set_image(url=foto)
+    
+    embed1.set_image(url=fotin)
     await message.channel.send(embed=embed1)
 
 

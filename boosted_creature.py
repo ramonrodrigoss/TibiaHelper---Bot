@@ -1,6 +1,3 @@
-import schedule
-import time
-
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -32,7 +29,11 @@ def criatura_dia():
   dr.get(img_url)
   foto = dr.find_element_by_xpath('//*[@id="mw-content-text"]/div/table/tbody/tr/td[1]/table/tbody/tr[1]/td[1]/a/img').get_attribute('src') 
   
+  with open ('criatura.txt', 'w')as texto :
+    texto.write(bixo+'\n')
+    texto.write(foto)
+
+
   return bixo, foto
-cont = 0
 
 
