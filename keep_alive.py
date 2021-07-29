@@ -1,6 +1,8 @@
 from flask import Flask
 from threading import Thread
-
+import schedule
+from exec_criatura import hello
+import time
 
 app = Flask('')
 
@@ -16,5 +18,4 @@ def run():
 def keep_alive():
     t = Thread(target=run)
     t.start()
-
 

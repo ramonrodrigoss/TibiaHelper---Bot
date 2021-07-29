@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import os
-
+import datetime
 
 def criatura_dia():
   #Aqui ele esta indo no site do Jogo e verificando qual é a criatura

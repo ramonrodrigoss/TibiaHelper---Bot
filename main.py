@@ -3,17 +3,19 @@ import discord
 my_secret = os.environ['TOKEN']
 from keep_alive import keep_alive
 from boosted_creature import criatura_dia
-
+from datetime import datetime
+import os
 import threading
-def hello():
-    t = threading.Timer(3600.0, hello)
-    t.start()
-    criatura_dia()
-    print('criatura carregada!') 
 
-t = threading.Timer(3600, hello)
-t.start() 
- 
+#def hello():
+    #t = threading.Timer(30.0, hello)
+   # t.start() 
+    #criatura_dia()
+    ##data = str(datetime.datetime.now())
+    #print('criatura carregada!'+data) 
+#t = threading.Timer(30.0, hello)
+#t.start() 
+
 
 
 ###############################################################
@@ -36,7 +38,16 @@ async def on_message(message):
 
 #################################################
   if message.content.startswith('!ola'):
+    data_e_hora_atuais = datetime.now()
+    data= data_e_hora_atuais.strftime('%d/%m/%Y %H:%M:%S')
+
+
+
     await message.channel.send('Olá, {0.author.mention}!'.format(message))
+    print("jogador {0.author} usou o comando !ola às " .format(message)+data)
+    
+    with open ('logs.txt', 'a') as log:
+      log.write("jogador {0.author} usou o comando !ola às ".format(message)+data)
     
 #################################################
 
@@ -57,6 +68,7 @@ async def on_message(message):
     
     embed1.set_image(url=fotin)
     await message.channel.send(embed=embed1)
+    print("jogador {0.author} usou o comando !criatura".format(message))
 
 
 
