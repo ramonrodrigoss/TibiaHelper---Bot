@@ -7,14 +7,31 @@ from datetime import datetime
 import os
 import threading
 
-#def hello():
-    #t = threading.Timer(30.0, hello)
-   # t.start() 
-    #criatura_dia()
-    ##data = str(datetime.datetime.now())
-    #print('criatura carregada!'+data) 
-#t = threading.Timer(30.0, hello)
-#t.start() 
+
+###############################################################
+def data_hora():
+  data_e_hora_atuais = datetime.now()
+  data= data_e_hora_atuais.strftime('%d/%m/%Y %H:%M:%S')
+  return data
+
+def hora_agora():
+  data_e_hora_atuais = datetime.now()
+  data= data_e_hora_atuais.strftime('%H:%M')
+  return data
+
+###############################################################
+
+def hello():
+    t = threading.Timer(1800.0, hello)
+    t.start() 
+    criatura_dia()
+    nome = criatura_dia()
+    nome = str(nome[0])
+    print('criatura carregada às '+data_hora())
+    #with open ('logs.txt') as arquivo:
+    #  arquivo.write("O Bot Armazenou a ciatura {} às " .format(nome)+data_hora()+'\n') 
+t = threading.Timer(1800.0, hello)
+t.start() 
 
 
 
@@ -24,7 +41,8 @@ client = discord.Client()
 @client.event
 async def on_ready():
   print('We have logged in as {0.user}'.format(client))
-
+  with open('logs.txt', 'a') as log:
+    log.write('--- O {0.user} iniciou às '.format(client)+data_hora()+'\n')
   
   
 
@@ -34,23 +52,12 @@ async def on_message(message):
   if message.author == client.user:
     return
 
-
-
-#################################################
   if message.content.startswith('!ola'):
-    data_e_hora_atuais = datetime.now()
-    data= data_e_hora_atuais.strftime('%d/%m/%Y %H:%M:%S')
-
-
-
     await message.channel.send('Olá, {0.author.mention}!'.format(message))
-    print("jogador {0.author} usou o comando !ola às " .format(message)+data)
-    
+    print("{0.author} usou o comando !ola às " .format(message)+data_hora())
     with open ('logs.txt', 'a') as log:
-      log.write("jogador {0.author} usou o comando !ola às ".format(message)+data)
+      log.write("{0.author} usou o comando !ola às ".format(message)+data_hora()+'\n')
     
-#################################################
-
 
   if message.content.startswith('!criatura'):
 
@@ -68,8 +75,10 @@ async def on_message(message):
     
     embed1.set_image(url=fotin)
     await message.channel.send(embed=embed1)
-    print("jogador {0.author} usou o comando !criatura".format(message))
-
+    print("{0.author} usou o comando !criatura às " .format(message)+data_hora())
+    with open ('logs.txt', 'a') as log:
+      log.write("{0.author} usou o comando !criatura às " .format(message)+data_hora()+'\n')
+###############################################################
 
 
 
